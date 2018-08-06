@@ -1,0 +1,97 @@
+consumes:
+- application/json
+info:
+  title: Rental Api
+  version: 1.0.0
+paths: {}
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
+paths:
+  /locations/cities:
+    get:
+      summary: "Get all cities"
+      operationId: "getCities"
+      responses:
+        200:
+          $ref: "#/responses/Cities"
+        400:
+          $ref: "#/responses/ErrorBadRequest"
+        401:
+          $ref: "#/responses/ErrorUnauthorized"
+        403:
+          $ref: "#/responses/ErrorForbidden"
+        404:
+          $ref: "#/responses/ErrorNotFound"
+        429:
+          $ref: "#/responses/ErrorTooManyRequests"
+        500:
+          $ref: "#/responses/ErrorInternalServerError"
+        502:
+          $ref: "#/responses/ErrorBadGateway"
+        503:
+          $ref: "#/responses/ErrorGatewayTimeout"
+responses:
+  Cities:
+    description: "List Cities"
+    schema:
+      $ref: "#/definitions/Cities"
+  ErrorBadRequest:
+    description: "Bad Request"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorUnauthorized:
+    description: "Unauthorized"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorForbidden:
+    description: "Forbidden"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorNotFound:
+    description: "Not Found"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorTooManyRequests:
+    description: "Too Many Requests"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorInternalServerError:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorBadGateway:
+    description: "Bad Gateway"
+    schema:
+      $ref: "#/definitions/Error"
+  ErrorGatewayTimeout:
+    description: "Gateway Timeout"
+    schema:
+      $ref: "#/definitions/Error"
+
+definitions:
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "No topic with id=bus-t4211 found"
+
+  Cities:
+    type: object
+    properties:
+      words:
+        type: array
+        items:
+          $ref: "#/definitions/City"
+  City:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "id-string"
+        name:
+          type: string
+          example: "An Giang"
